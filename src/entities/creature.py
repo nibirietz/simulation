@@ -1,6 +1,8 @@
 from abc import abstractmethod
 
-from src.board import Board
+from pychess.Utils.Board import Board
+
+from src.game_map import GameMap
 from src.coordinates import Coordinates
 from src.entities.entities import Entity
 
@@ -12,5 +14,5 @@ class Creature(Entity):
         self.hp = hp
 
     @abstractmethod
-    def make_move(self, board: Board):
+    def make_move(self, game_map: GameMap, coordinates: Coordinates):
         pass
