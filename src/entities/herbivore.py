@@ -1,13 +1,11 @@
-from src.entities.herbivore import Herbivore
-from src.game_map import GameMap
 from src.coordinates import Coordinates
 from src.entities.creature import Creature
+from src.game_map import GameMap
 
 
-class Predator(Creature):
-    def __init__(self, coordinates: Coordinates, speed: int = 1, hp: float = 1, attack_power: int = 1):
+class Herbivore(Creature):
+    def __init__(self, coordinates: Coordinates, speed: int = 1, hp: float = 1):
         super().__init__(coordinates, speed, hp)
-        self.attack_power = attack_power
 
     def make_move(self, game_map: GameMap, new_coordinates: Coordinates):
         if new_coordinates not in game_map.neighbour_coordinates(self.coordinates): return
@@ -15,8 +13,3 @@ class Predator(Creature):
             game_map.remove_object(self.coordinates)
             game_map.put_object(new_coordinates, self)
             return
-        if type(game_map.objects[new_coordinates]) == Herbivore:
-            self.attack_herbivore(new_coordinates)
-
-    def attack_herbivore(self, coordinates: Coordinates):
-        pass

@@ -14,5 +14,5 @@ class Creature(Entity):
         self.hp = hp
 
     @abstractmethod
-    def make_move(self, game_map: GameMap, coordinates: Coordinates):
+    def make_move(self, game_map: GameMap, new_coordinates: Coordinates):
         pass
