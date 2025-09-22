@@ -28,9 +28,8 @@ class GameMap:
 
     def neighbour_coordinates(self, coordinates: Coordinates):
         neighbours = [
-            coordinates + Coordinates(-1, -1), coordinates + Coordinates(0, -1), coordinates + Coordinates(1, -1),
-            coordinates + Coordinates(-1, 0), coordinates + Coordinates(1, 0),
-            coordinates + Coordinates(-1, 1), coordinates + Coordinates(0, 1), coordinates + Coordinates(1, 1)
+            coordinates + Coordinates(0, -1), coordinates + Coordinates(-1, 0),
+            coordinates + Coordinates(1, 0), coordinates + Coordinates(0, 1)
         ]
 
         return [coordinates for coordinates in neighbours if self.is_valid_coordinates(coordinates)]
