@@ -9,14 +9,16 @@ class Predator(Creature):
         super().__init__(coordinates, speed, hp)
         self.attack_power = attack_power
 
-    def make_move(self, game_map: GameMap, new_coordinates: Coordinates):
-        if new_coordinates not in game_map.neighbour_coordinates(self.coordinates): return
-        if game_map.is_square_empty(new_coordinates):
-            game_map.remove_object(self.coordinates)
-            game_map.put_object(new_coordinates, self)
-            return
-        if type(game_map.objects[new_coordinates]) == Herbivore:
-            self.attack_herbivore(new_coordinates)
+    @staticmethod
+    def is_enemy_square(game_map: GameMap, coordinates: Coordinates):
+        return type(game_map.get_object(coordinates)) == Herbivore
 
-    def attack_herbivore(self, coordinates: Coordinates):
+    def make_move(self, game_map: GameMap, new_coordinates: Coordinates):
+        if new_coordinates in game_map.neighbour_coordinates(self.coordinates) and game_map.is_square_empty(
+                new_coordinates):
+            self.go_to_cell(game_map, new_coordinates)
+        if self.is_enemy_square(game_map, new_coordinates):
+            self.attack(new_coordinates)
+
+    def attack(self, coordinates: Coordinates):
         pass

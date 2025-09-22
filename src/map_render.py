@@ -18,8 +18,8 @@ class MapRender:
                 if board.is_square_empty(coordinates):
                     line += f" {self.empty_cell} "
                 else:
-                    entity_type = board.get_object(coordinates)
-                    match entity_type:
+                    entity = board.get_object(coordinates)
+                    match entity:
                         case Predator():
                             line += f" {self.predator} "
                         case Herbivore():

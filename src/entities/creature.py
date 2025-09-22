@@ -16,3 +16,8 @@ class Creature(Entity):
     @abstractmethod
     def make_move(self, game_map: GameMap, new_coordinates: Coordinates):
         pass
+
+    def go_to_cell(self, game_map: GameMap, new_coordinates: Coordinates):
+        if game_map.neighbour_coordinates(self.coordinates):
+            game_map.remove_object(self.coordinates)
+            game_map.put_object(self.coordinates, self)
