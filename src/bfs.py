@@ -8,11 +8,23 @@ from src.game_map import GameMap
 
 
 class BFS:
+    # @staticmethod
+    # def minimal_path(paths: list[list[Coordinates]]) -> list[Coordinates] | None:
+    #     if len(paths) == 0: return None
+    #     result = paths[0]
+    #
+    #     for path in paths:
+    #         if len(path) < len(result):
+    #             result = path
+    #
+    #     return result
+
     @staticmethod
     def search_path(game_map: GameMap, start_coordinates: Coordinates, targets: list[Coordinates]) -> list[
                                                                                                           Coordinates] | None:
         queue = deque([start_coordinates])
         previous_cell = {start_coordinates: None}
+        # paths = []
 
         while queue:
             current_coordinates = queue.popleft()
@@ -26,6 +38,7 @@ class BFS:
                     path_point = previous_cell[path_point]
 
                 path.reverse()
+                # paths.append(path)
                 return path
 
             for neighbour in game_map.neighbour_coordinates(current_coordinates):
