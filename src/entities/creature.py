@@ -1,10 +1,7 @@
 from abc import abstractmethod
-
-from pychess.Utils.Board import Board
-
-from src.game_map import GameMap
+import game_map
 from src.coordinates import Coordinates
-from src.entities.entities import Entity
+from src.entities.entity import Entity
 
 
 class Creature(Entity):
@@ -14,10 +11,5 @@ class Creature(Entity):
         self.hp = hp
 
     @abstractmethod
-    def make_move(self, game_map: GameMap, new_coordinates: Coordinates):
+    def make_move(self, current_map: game_map.GameMap, path: list[Coordinates]):
         pass
-
-    def go_to_cell(self, game_map: GameMap, new_coordinates: Coordinates):
-        if game_map.neighbour_coordinates(self.coordinates):
-            game_map.remove_object(self.coordinates)
-            game_map.put_object(self.coordinates, self)

@@ -1,13 +1,10 @@
 from collections import deque
 
 from src.coordinates import Coordinates
-from src.entities.entities import Entity
-from src.entities.herbivore import Herbivore
-from src.entities.predator import Predator
 from src.game_map import GameMap
 
 
-class BFS:
+class BreadFirstSearch:
     # @staticmethod
     # def minimal_path(paths: list[list[Coordinates]]) -> list[Coordinates] | None:
     #     if len(paths) == 0: return None
@@ -45,7 +42,7 @@ class BFS:
                 if neighbour in previous_cell:
                     continue
 
-                if game_map.is_square_empty(neighbour) or neighbour in targets:
+                if game_map.is_cell_empty(neighbour) or neighbour in targets:
                     previous_cell[neighbour] = current_coordinates
                     queue.append(neighbour)
 

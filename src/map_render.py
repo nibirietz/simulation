@@ -1,7 +1,6 @@
-from src.entities.herbivore import Herbivore
+from src.entities import Herbivore, Predator
 from src.game_map import GameMap
 from src.coordinates import Coordinates
-from src.entities.predator import Predator
 
 
 class MapRender:
@@ -15,7 +14,7 @@ class MapRender:
             for j in range(board.height):
                 coordinates = Coordinates(i, j)
 
-                if board.is_square_empty(coordinates):
+                if board.is_cell_empty(coordinates):
                     line += f" {self.empty_cell} "
                 else:
                     entity = board.get_object(coordinates)

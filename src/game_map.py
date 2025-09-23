@@ -1,12 +1,12 @@
+from src.entities.entity import Entity
 from src.coordinates import Coordinates
-from src.entities.entities import Entity
 
 
 class GameMap:
     def __init__(self, width: int, height: int):
         self.width = width
         self.height = height
-        self.objects = dict()
+        self.objects: dict[Coordinates, Entity] = dict()
 
     def put_object(self, coordinates: Coordinates, entity: Entity):
         entity.coordinates = coordinates
@@ -18,7 +18,7 @@ class GameMap:
     def remove_object(self, coordinates: Coordinates):
         del self.objects[coordinates]
 
-    def is_square_empty(self, coordinates: Coordinates) -> Entity:
+    def is_cell_empty(self, coordinates: Coordinates) -> Entity:
         return coordinates not in self.objects
 
     def is_valid_coordinates(self, coordinates: Coordinates):
@@ -33,3 +33,6 @@ class GameMap:
         ]
 
         return [coordinates for coordinates in neighbours if self.is_valid_coordinates(coordinates)]
+
+    def get_entities(self) -> list[Entity]:
+        return list(self.objects.values())

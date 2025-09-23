@@ -1,6 +1,6 @@
-from src.game_map import GameMap
+import game_map
 from src.coordinates import Coordinates
-from src.entities.creature import Creature
+from src.entities import Creature
 
 
 class Predator(Creature):
@@ -12,10 +12,8 @@ class Predator(Creature):
     # def is_enemy_square(game_map: GameMap, coordinates: Coordinates):
     #     return type(game_map.get_object(coordinates)) == Herbivore
 
-    def make_move(self, game_map: GameMap, new_coordinates: Coordinates):
-        if new_coordinates in game_map.neighbour_coordinates(self.coordinates) and game_map.is_square_empty(
-                new_coordinates):
-            self.go_to_cell(game_map, new_coordinates)
+    def make_move(self, current_map: game_map.GameMap, path: list[Coordinates]):
+        pass
 
     def attack(self, coordinates: Coordinates):
         pass
