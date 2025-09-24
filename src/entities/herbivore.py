@@ -9,3 +9,6 @@ class Herbivore(Creature):
 
     def make_move(self, current_map: game_map.GameMap, path: list[Coordinates]):
         pass
+
+    def eat(self, current_map: game_map.GameMap, coordinates: Coordinates):
+        pass

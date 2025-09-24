@@ -1,3 +1,5 @@
+from time import sleep
+
 from src.action import Action
 from src.entities import Entity, Creature, Predator, Herbivore
 from src.game_map import GameMap
@@ -20,10 +22,12 @@ def main():
     entity5 = Predator(Coordinates(8, 8))
     game_map.put_object(Coordinates(8, 8), entity5)
     actions = Action()
-    actions.turn_actions(game_map)
-
     map_render = MapRender()
-    map_render.render(game_map)
+
+    while True:
+        game_map = actions.turn_actions(game_map)
+        map_render.render(game_map)
+
     # bfs = BreadFirstSearch()
     # print([(coordinates.row, coordinates.column) for coordinates in
     #        bfs.search_path(game_map, entity1.coordinates,

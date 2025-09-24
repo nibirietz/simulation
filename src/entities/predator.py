@@ -8,12 +8,20 @@ class Predator(Creature):
         super().__init__(coordinates, speed, hp)
         self.attack_power = attack_power
 
-    # @staticmethod
-    # def is_enemy_square(game_map: GameMap, coordinates: Coordinates):
-    #     return type(game_map.get_object(coordinates)) == Herbivore
-
     def make_move(self, current_map: game_map.GameMap, path: list[Coordinates]):
-        pass
+        if path is None:
+            return
 
-    def attack(self, coordinates: Coordinates):
-        pass
+        if self.speed + 1 >= len(path):
+            if len(path) >= 2:
+                penultimate_coordinates = path[-2]
+                current_map.remove_object(self.coordinates)
+                current_map.put_object(penultimate_coordinates, self)
+
+            self.eat(current_map, path[-1])
+
+    def eat(self, current_map: game_map.GameMap, target_coordinates: Coordinates):
+        # TODO: переделать заглушку
+        current_map.remove_object(target_coordinates)
+        current_map.remove_object(self.coordinates)
+        current_map.put_object(target_coordinates, self)
