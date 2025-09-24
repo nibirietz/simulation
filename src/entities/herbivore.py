@@ -8,7 +8,14 @@ class Herbivore(Creature):
         super().__init__(coordinates, speed, hp)
 
     def make_move(self, current_map: game_map.GameMap, path: list[Coordinates]):
-        pass
+        if path is None:
+            return
 
-    def eat(self, current_map: game_map.GameMap, coordinates: Coordinates):
-        pass
+        if self.speed + 1 >= len(path):
+            self.eat(current_map, path[-1])
+        else:
+            self.shift(current_map, path[self.speed])
+
+    def eat(self, current_map: game_map.GameMap, target_coordinates: Coordinates):
+        current_map.remove_object(target_coordinates)
+        self.shift(current_map, target_coordinates)

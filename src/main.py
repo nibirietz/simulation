@@ -1,48 +1,18 @@
-from time import sleep
-
-from src.action import Action
-from src.entities import Entity, Creature, Predator, Herbivore
+from simulation import Simulation
+from src.actions import Actions
 from src.game_map import GameMap
-from src.map_render import MapRender
-from src.coordinates import Coordinates
-from src.breadfirstsearch import BreadFirstSearch
+from src.map_renderer import MapRenderer
 
 
 def main():
     game_map = GameMap(10, 10)
-    entity1 = Predator(Coordinates(1, 1))
-    print(isinstance(entity1, Entity))
-    game_map.put_object(Coordinates(1, 1), entity1)
-    entity2 = Herbivore(Coordinates(1, 4))
-    game_map.put_object(Coordinates(1, 4), entity2)
-    entity3 = Herbivore(Coordinates(3, 1))
-    game_map.put_object(Coordinates(3, 1), entity3)
-    entity4 = Herbivore(Coordinates(0, 1))
-    game_map.put_object(Coordinates(0, 1), entity4)
-    entity5 = Predator(Coordinates(8, 8))
-    game_map.put_object(Coordinates(8, 8), entity5)
-    actions = Action()
-    map_render = MapRender()
-    # bfs = BreadFirstSearch()
-    # path = bfs.search_path(game_map, entity1.coordinates, [entity2.coordinates])
-    # entity1.make_move(game_map, path)
-    # map_render.render(game_map)
-    # path = bfs.search_path(game_map, entity1.coordinates, [entity2.coordinates])
-    # entity1.make_move(game_map, path)
-    # map_render.render(game_map)
-    # path = bfs.search_path(game_map, entity1.coordinates, [entity2.coordinates])
-    # entity1.make_move(game_map, path)
-    # map_render.render(game_map)
-    while True:
-        actions.turn_actions(game_map)
-        print("---")
-        map_render.render(game_map)
-        sleep(1)
+    map_render = MapRenderer()
+    actions = Actions()
+    simulation = Simulation(game_map, map_render, actions)
 
-    # bfs = BreadFirstSearch()
-    # print([(coordinates.row, coordinates.column) for coordinates in
-    #        bfs.search_path(game_map, entity1.coordinates,
-    #                        [entity2.coordinates, entity3.coordinates, entity4.coordinates])])
+    simulation.init()
+    print(game_map.get_entities())
+    simulation.start()
 
 
 if __name__ == "__main__":

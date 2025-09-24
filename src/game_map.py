@@ -11,6 +11,10 @@ class GameMap:
     def put_object(self, coordinates: Coordinates, entity: Entity):
         self.objects[coordinates] = entity
 
+    def put_objects(self, entities: list[Entity]):
+        for entity in entities:
+            self.put_object(entity.coordinates, entity)
+
     def get_object(self, coordinates: Coordinates) -> Entity:
         return self.objects[coordinates]
 

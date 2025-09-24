@@ -1,13 +1,22 @@
-from entities.grass import Grass
+from coordinates import Coordinates
+from src.entities.grass import Grass
 from src.breadfirstsearch import BreadFirstSearch
 from src.entities import Creature, Herbivore, Predator
 from src.game_map import GameMap
 
 
-class Action:
+class Actions:
     @staticmethod
     def init_actions(game_map: GameMap):
-        pass
+        game_map.put_objects(
+            [
+                Herbivore(Coordinates(1, 1)),
+                Herbivore(Coordinates(2, 4)),
+                Predator(Coordinates(3, 7)),
+                Predator(Coordinates(4, 2)),
+                Grass(Coordinates(0, 4)),
+            ]
+        )
 
     @staticmethod
     def turn_actions(game_map: GameMap) -> GameMap:
