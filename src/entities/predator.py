@@ -15,13 +15,13 @@ class Predator(Creature):
         if self.speed + 1 >= len(path):
             if len(path) >= 2:
                 penultimate_coordinates = path[-2]
-                current_map.remove_object(self.coordinates)
-                current_map.put_object(penultimate_coordinates, self)
+                self.shift(current_map, penultimate_coordinates)
 
             self.eat(current_map, path[-1])
+        else:
+            self.shift(current_map, path[self.speed])
 
     def eat(self, current_map: game_map.GameMap, target_coordinates: Coordinates):
         # TODO: переделать заглушку
         current_map.remove_object(target_coordinates)
-        current_map.remove_object(self.coordinates)
-        current_map.put_object(target_coordinates, self)
+        self.shift(current_map, target_coordinates)

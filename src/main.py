@@ -23,10 +23,21 @@ def main():
     game_map.put_object(Coordinates(8, 8), entity5)
     actions = Action()
     map_render = MapRender()
-
+    # bfs = BreadFirstSearch()
+    # path = bfs.search_path(game_map, entity1.coordinates, [entity2.coordinates])
+    # entity1.make_move(game_map, path)
+    # map_render.render(game_map)
+    # path = bfs.search_path(game_map, entity1.coordinates, [entity2.coordinates])
+    # entity1.make_move(game_map, path)
+    # map_render.render(game_map)
+    # path = bfs.search_path(game_map, entity1.coordinates, [entity2.coordinates])
+    # entity1.make_move(game_map, path)
+    # map_render.render(game_map)
     while True:
-        game_map = actions.turn_actions(game_map)
+        actions.turn_actions(game_map)
+        print("---")
         map_render.render(game_map)
+        sleep(1)
 
     # bfs = BreadFirstSearch()
     # print([(coordinates.row, coordinates.column) for coordinates in

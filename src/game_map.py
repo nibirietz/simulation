@@ -9,7 +9,6 @@ class GameMap:
         self.objects: dict[Coordinates, Entity] = dict()
 
     def put_object(self, coordinates: Coordinates, entity: Entity):
-        entity.coordinates = coordinates
         self.objects[coordinates] = entity
 
     def get_object(self, coordinates: Coordinates) -> Entity:
