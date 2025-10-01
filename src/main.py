@@ -7,11 +7,9 @@ from src.map_renderer import MapRenderer
 def main():
     game_map = GameMap(10, 10)
     map_render = MapRenderer()
-    actions = Actions()
-    simulation = Simulation(game_map, map_render, actions)
+    simulation = Simulation(game_map, map_render)
 
     simulation.init()
-    print(game_map.get_entities())
     simulation.start()
 
 

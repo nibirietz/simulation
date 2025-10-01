@@ -1,4 +1,5 @@
 import game_map
+import src.entities
 from src.coordinates import Coordinates
 from src.entities import Creature
 
@@ -22,6 +23,6 @@ class Predator(Creature):
             self.shift(current_map, path[self.speed])
 
     def eat(self, current_map: game_map.GameMap, target_coordinates: Coordinates):
-        # TODO: переделать заглушку
-        current_map.remove_object(target_coordinates)
-        self.shift(current_map, target_coordinates)
+        if isinstance(current_map.get_object(target_coordinates), src.entities.Herbivore):
+            current_map.remove_object(target_coordinates)
+            self.shift(current_map, target_coordinates)

@@ -19,6 +19,9 @@ class GameMap:
         return self.objects[coordinates]
 
     def remove_object(self, coordinates: Coordinates):
+        if self.is_cell_empty(coordinates):
+            print("Удаление пустой клетки.", coordinates.row, coordinates.column)
+            return
         del self.objects[coordinates]
 
     def is_cell_empty(self, coordinates: Coordinates) -> Entity:
