@@ -19,7 +19,6 @@ class Simulation:
 
     def next_turn(self):
         self.move_counter += 1
-        self.game_map.put_objects(self.actions.generate_random_entities(Grass, 0.3))
         self.actions.turn_actions()
         self.map_renderer.render(self.game_map)
 

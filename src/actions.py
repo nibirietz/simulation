@@ -25,7 +25,7 @@ class Actions:
         # )
         # self.game_map.put_objects(self.generate_random_entities())
         herbivores = self.generate_random_entities(Herbivore, 0.69)
-        predators = self.generate_random_entities(Predator, 0.2)
+        predators = self.generate_random_entities(Predator, 0.33)
         grass = self.generate_random_entities(Grass, 0.7)
 
         self.game_map.put_objects(herbivores + predators + grass)
@@ -61,3 +61,8 @@ class Actions:
         for predator in predators:
             path = bfs.search_path(self.game_map, predator.coordinates, herbivores_coordinates)
             predator.make_move(self.game_map, path)
+
+        grass_count = len([grass for grass in self.game_map.get_entities() if isinstance(grass, Grass)])
+        if grass_count < 5:
+            grass = self.generate_random_entities(Grass, 0.3)
+            self.game_map.put_objects(grass)
