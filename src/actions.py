@@ -1,9 +1,10 @@
 from random import randrange
 from typing import Type
 
-from typing_extensions import TypeVar, Any, Generic
+from typing_extensions import TypeVar
 
 from coordinates import Coordinates
+from controllers.creature_mover import CreatureMover
 from src.breadfirstsearch import BreadFirstSearch
 from src.entities import Creature, Herbivore, Predator, Entity, Grass
 from src.game_map import GameMap
@@ -54,13 +55,13 @@ class Actions:
 
         for herbivore in herbivores:
             path = bfs.search_path(self.game_map, herbivore.coordinates, grasses_coordinates)
-            herbivore.make_move(self.game_map, path)
+            CreatureMover.make_move(self.game_map, herbivore, path)
 
         herbivores_coordinates = [herbivore.coordinates for herbivore in herbivores]
 
         for predator in predators:
             path = bfs.search_path(self.game_map, predator.coordinates, herbivores_coordinates)
-            predator.make_move(self.game_map, path)
+            CreatureMover.make_move(self.game_map, predator, path)
 
         grass_count = len([grass for grass in self.game_map.get_entities() if isinstance(grass, Grass)])
         if grass_count < 5:

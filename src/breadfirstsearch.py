@@ -5,17 +5,6 @@ from src.game_map import GameMap
 
 
 class BreadFirstSearch:
-    # @staticmethod
-    # def minimal_path(paths: list[list[Coordinates]]) -> list[Coordinates] | None:
-    #     if len(paths) == 0: return None
-    #     result = paths[0]
-    #
-    #     for path in paths:
-    #         if len(path) < len(result):
-    #             result = path
-    #
-    #     return result
-
     @staticmethod
     def search_path(game_map: GameMap, start_coordinates: Coordinates, targets: list[Coordinates]) -> list[
                                                                                                           Coordinates] | None:

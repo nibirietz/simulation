@@ -1,5 +1,4 @@
 from simulation import Simulation
-from src.actions import Actions
 from src.game_map import GameMap
 from src.map_renderer import MapRenderer
 

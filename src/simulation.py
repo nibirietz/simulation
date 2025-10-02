@@ -1,7 +1,5 @@
 from time import sleep
-
 from actions import Actions
-from entities import Grass
 from game_map import GameMap
 from map_renderer import MapRenderer
 

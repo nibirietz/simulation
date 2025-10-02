@@ -10,20 +10,8 @@ class Creature(Entity):
         self.speed = speed
         self.hp = hp
 
-    @abstractmethod
-    def make_move(self, current_map: game_map.GameMap, path: list[Coordinates]):
-        pass
-
-    def shift(self, current_map: game_map.GameMap, new_coordinates: Coordinates):
-        if current_map.is_cell_empty(new_coordinates):
-            current_map.remove_object(self.coordinates)
-            current_map.put_object(new_coordinates, self)
-            self.coordinates = new_coordinates
-
-    def get_damage(self, current_map: game_map.GameMap, attack_power: float):
+    def get_damage(self, attack_power: float):
         self.hp -= attack_power
-        if self.hp <= 0:
-            current_map.remove_object(self.coordinates)
 
     def is_alive(self):
         return self.hp > 0
