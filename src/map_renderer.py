@@ -1,6 +1,7 @@
-from src.entities import Herbivore, Predator, Grass
-from src.game_map import GameMap
-from src.coordinates import Coordinates
+import os
+from entities import Herbivore, Predator, Grass
+from game_map import GameMap
+from coordinates import Coordinates
 
 
 class MapRenderer:
@@ -10,6 +11,8 @@ class MapRenderer:
     grass = "☘️"
 
     def render(self, game_map: GameMap):
+        os.system('clear')
+
         print("-------")
         for i in range(game_map.width):
             line = ""

@@ -1,6 +1,6 @@
 from simulation import Simulation
-from src.game_map import GameMap
-from src.map_renderer import MapRenderer
+from game_map import GameMap
+from map_renderer import MapRenderer
 
 
 def main():

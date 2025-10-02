@@ -5,9 +5,9 @@ from typing_extensions import TypeVar
 
 from coordinates import Coordinates
 from controllers.creature_mover import CreatureMover
-from src.breadfirstsearch import BreadFirstSearch
-from src.entities import Creature, Herbivore, Predator, Entity, Grass
-from src.game_map import GameMap
+from breadfirstsearch import BreadFirstSearch
+from entities import Creature, Herbivore, Predator, Entity, Grass
+from game_map import GameMap
 
 T = TypeVar("T", bound=Entity)
 

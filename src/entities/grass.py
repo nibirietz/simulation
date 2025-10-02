@@ -1,5 +1,5 @@
-from src.coordinates import Coordinates
-from src.entities import Entity
+from coordinates import Coordinates
+from entities import Entity
 
 
 class Grass(Entity):

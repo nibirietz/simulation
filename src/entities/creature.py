@@ -1,7 +1,5 @@
-from abc import abstractmethod
-import game_map
-from src.coordinates import Coordinates
-from src.entities.entity import Entity
+from coordinates import Coordinates
+from entities.entity import Entity
 
 
 class Creature(Entity):

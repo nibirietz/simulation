@@ -1,5 +1,5 @@
-from src.coordinates import Coordinates
-from src.entities import Creature
+from coordinates import Coordinates
+from entities import Creature
 
 
 class Predator(Creature):

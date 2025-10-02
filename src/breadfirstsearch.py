@@ -1,7 +1,7 @@
 from collections import deque
 
-from src.coordinates import Coordinates
-from src.game_map import GameMap
+from coordinates import Coordinates
+from game_map import GameMap
 
 
 class BreadFirstSearch:
