@@ -1,5 +1,5 @@
 import os
-from entities import Herbivore, Predator, Grass
+from entities import Herbivore, Predator, Grass, Rock
 from game_map import GameMap
 from coordinates import Coordinates
 
@@ -9,29 +9,32 @@ class MapRenderer:
     predator = "🐺"
     herbivore = "🐇"
     grass = "☘️"
+    rock = "🪨"
 
-    def render(self, game_map: GameMap):
+    def render(self, game_map: GameMap, move_counter: int):
         os.system('clear')
 
-        print("-------")
+        print(f"Ходов сделано: {move_counter}.")
         for i in range(game_map.width):
             line = ""
             for j in range(game_map.height):
                 coordinates = Coordinates(i, j)
 
                 if game_map.is_cell_empty(coordinates):
-                    line += f" {self.empty_cell} "
+                    line += f"{self.empty_cell}"
                 else:
                     entity = game_map.get_object(coordinates)
                     match entity:
                         case Predator():
-                            line += f" {self.predator} "
+                            line += f"{self.predator}"
                         case Herbivore():
-                            line += f" {self.herbivore} "
+                            line += f"{self.herbivore}"
                         case Grass():
-                            line += f" {self.grass} "
+                            line += f"{self.grass}"
+                        case Rock():
+                            line += f"{self.rock}"
                         case _:
-                            line += f" - "
+                            line += f"-"
 
             print(line)
         print("-------")

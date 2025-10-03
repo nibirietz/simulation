@@ -13,12 +13,12 @@ class Simulation:
 
     def init(self):
         self.actions.init()
-        self.map_renderer.render(self.game_map)
+        self.map_renderer.render(self.game_map, self.move_counter)
 
     def next_turn(self):
         self.move_counter += 1
         self.actions.turn_actions()
-        self.map_renderer.render(self.game_map)
+        self.map_renderer.render(self.game_map, self.move_counter)
 
     def start(self):
         while True:
