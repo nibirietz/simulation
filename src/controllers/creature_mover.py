@@ -1,5 +1,4 @@
 from random import choice
-
 from coordinates import Coordinates
 from entities import Creature, Predator, Herbivore, Grass
 from game_map import GameMap

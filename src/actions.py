@@ -39,18 +39,19 @@ class Actions:
         return generated_entities
 
     def turn_actions(self):
-        creatures = [creature for creature in self.game_map.get_entities() if isinstance(creature, Creature)]
-        herbivores = [herbivore for herbivore in creatures if isinstance(herbivore, Herbivore)]
-        predators = [predator for predator in creatures if isinstance(predator, Predator)]
-        grasses_coordinates = [grass.coordinates for grass in self.game_map.get_entities() if isinstance(grass, Grass)]
+        entities = self.game_map.get_entities()
+        predators = [entity for entity in entities if isinstance(entity, Predator)]
+        herbivores = [entity for entity in entities if isinstance(entity, Herbivore)]
+        grass = [entity for entity in entities if isinstance(entity, Grass)]
+
+        herbivores_coordinates = [herbivore.coordinates for herbivore in herbivores]
+        grass_coordinates = [grass.coordinates for grass in grass]
 
         bfs = BreadFirstSearch()
 
         for herbivore in herbivores:
-            path = bfs.search_path(self.game_map, herbivore.coordinates, grasses_coordinates)
+            path = bfs.search_path(self.game_map, herbivore.coordinates, grass_coordinates)
             CreatureMover.make_move(self.game_map, herbivore, path)
-
-        herbivores_coordinates = [herbivore.coordinates for herbivore in herbivores]
 
         for predator in predators:
             path = bfs.search_path(self.game_map, predator.coordinates, herbivores_coordinates)
@@ -71,3 +72,5 @@ class Actions:
         if herbivores_count < 5:
             herbivores = self.generate_random_entities(Herbivore, 0.2)
             self.game_map.put_objects(herbivores)
+
+        # TODO: переделать подсчёт существ
