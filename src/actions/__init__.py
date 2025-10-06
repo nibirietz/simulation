@@ -1,4 +1,5 @@
 from actions.action import Action
-# from actions.init_actions import InitActions
-from actions.move_all_creatures import MoveAllCreatures
-from actions.spawn_random_entities_action import SpawnRandomEntitiesAction
+from actions.move_all_creatures import MoveAllCreaturesAction
+from actions.random_spawn_action import RandomSpawnAction
+from actions.random_spawn_entities_action import RandomSpawnEntitiesAction
+from actions.random_spawn_immutables_entities_action import RandomSpawnImmutablesEntitiesAction

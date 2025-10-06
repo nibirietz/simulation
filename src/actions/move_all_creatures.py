@@ -6,14 +6,14 @@ from entities import Entity, Predator, Herbivore, Grass, Creature
 from game_map import GameMap
 
 
-class MoveAllCreatures(Action):
+class MoveAllCreaturesAction(Action):
     @staticmethod
     def execute(game_map: GameMap):
         creatures = [entity for entity in game_map.get_entities() if isinstance(entity, Creature)]
 
         bfs = BreadFirstSearch()
         for creature in creatures:
-            targets = MoveAllCreatures._get_targets(game_map, creature)
+            targets = MoveAllCreaturesAction._get_targets(game_map, creature)
             path = bfs.search_path(game_map, creature.coordinates, targets)
             CreatureMover.make_move(game_map, creature, path)
 

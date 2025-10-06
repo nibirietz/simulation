@@ -1,4 +1,7 @@
 import os
+import select
+import sys
+
 from entities import Herbivore, Predator, Grass, Rock
 from game_map import GameMap
 from coordinates import Coordinates
@@ -37,4 +40,10 @@ class MapRenderer:
                             line += f"-"
 
             print(line)
-        print("-------")
+        print("-" * game_map.width * 2)
+
+    def is_pause(self):
+        if sys.stdin in select.select([sys.stdin], [], [], 0.5)[0]:
+            user_input = input().strip().lower()
+            if user_input == "p":
+                return True
