@@ -1,4 +1,5 @@
 from actions import Action
+from breadfirstsearch import BreadFirstSearch
 from controllers import CreatureMover
 from coordinates import Coordinates
 from entities import Entity, Predator, Herbivore, Grass, Creature
@@ -9,8 +10,12 @@ class MoveAllCreatures(Action):
     @staticmethod
     def execute(game_map: GameMap):
         creatures = [entity for entity in game_map.get_entities() if isinstance(entity, Creature)]
+
+        bfs = BreadFirstSearch()
         for creature in creatures:
-            CreatureMover.make_move(game_map, creature, MoveAllCreatures._get_targets(game_map, creature))
+            targets = MoveAllCreatures._get_targets(game_map, creature)
+            path = bfs.search_path(game_map, creature.coordinates, targets)
+            CreatureMover.make_move(game_map, creature, path)
 
     @staticmethod
     def _get_targets(game_map: GameMap, entity: Entity) -> list[Coordinates]:

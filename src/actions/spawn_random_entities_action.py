@@ -8,18 +8,18 @@ from game_map import GameMap
 
 T = TypeVar("T", bound=Entity)
 
-PREDATORS_SPAWN_RATE = 0.2
-HERBIVORE_SPAWN_RATE = 0.3
-GRASS_SPAWN_RATE = 0.3
+PREDATORS_SPAWN_RATE = 0.1
+HERBIVORE_SPAWN_RATE = 0.15
+GRASS_SPAWN_RATE = 0.15
 
 
 class SpawnRandomEntitiesAction(Action):
     @staticmethod
     def execute(game_map: GameMap):
         game_map_square = game_map.width * game_map.height
-        grasses_amount = GRASS_SPAWN_RATE * game_map_square ** 0.5
-        herbivores_amount = HERBIVORE_SPAWN_RATE * game_map_square ** 0.5
-        predators_amount = PREDATORS_SPAWN_RATE * game_map_square ** 0.5
+        grasses_amount = int(GRASS_SPAWN_RATE * game_map_square ** 0.5)
+        herbivores_amount = int(HERBIVORE_SPAWN_RATE * game_map_square ** 0.5)
+        predators_amount = int(PREDATORS_SPAWN_RATE * game_map_square ** 0.5)
 
         grasses = SpawnRandomEntitiesAction._generate_random_entities(game_map, Grass, grasses_amount)
         herbivores = SpawnRandomEntitiesAction._generate_random_entities(game_map, Herbivore, herbivores_amount)

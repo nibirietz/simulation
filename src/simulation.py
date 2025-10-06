@@ -1,5 +1,6 @@
 from time import sleep
-from actions import Actions
+
+from actions import SpawnRandomEntitiesAction, Action, MoveAllCreatures
 from game_map import GameMap
 from map_renderer import MapRenderer
 
@@ -9,15 +10,20 @@ class Simulation:
         self.game_map = game_map
         self.move_counter = 0
         self.map_renderer = map_renderer
-        self.actions = Actions(game_map)
+        self.init_actions: list[Action] = [SpawnRandomEntitiesAction(), SpawnRandomEntitiesAction()]
+        self.turn_action: list[Action] = [MoveAllCreatures(), SpawnRandomEntitiesAction()]
+
+    def _execute_actions(self, actions: list[Action]):
+        for action in actions:
+            action.execute(self.game_map)
 
     def init(self):
-        self.actions.init()
+        self._execute_actions(self.init_actions)
         self.map_renderer.render(self.game_map, self.move_counter)
 
     def next_turn(self):
         self.move_counter += 1
-        self.actions.turn_actions()
+        self._execute_actions(self.turn_action)
         self.map_renderer.render(self.game_map, self.move_counter)
 
     def start(self):
