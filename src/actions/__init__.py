@@ -3,4 +3,4 @@ from actions.move_all_creatures import MoveAllCreaturesAction
 from actions.spawn_action import SpawnAction
 from actions.dynamic_spawn_action import DynamicSpawnAction
 from actions.initial_spawn_action import InitialSpawnAction
-from actions.clear_dead_creature_action import ClearDeadCreatureAction
+from actions.clear_dead_creatures_action import ClearDeadCreaturesAction

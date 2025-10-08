@@ -44,9 +44,17 @@ class MapRenderer:
 
             print(line)
         print("-" * game_map.width * 2)
+        print("Чтобы остановить напишите p. Чтобы выйти напишите e.")
 
     def is_pause(self):
         if sys.stdin in select.select([sys.stdin], [], [], 0.5)[0]:
             user_input = input().strip().lower()
             if user_input == "p":
+                return True
+        return False
+
+    def is_exit(self):
+        if sys.stdin in select.select([sys.stdin], [], [], 0.5)[0]:
+            user_input = input().strip().lower()
+            if user_input == "e":
                 return True
