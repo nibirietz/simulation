@@ -2,18 +2,19 @@ import os
 import select
 import sys
 
-from entities import Herbivore, Predator, Grass, Rock, DeadCreature
+from entities import Herbivore, Predator, Grass, Rock, DeadCreature, Tree
 from game_map import GameMap
 from coordinates import Coordinates
 
 
 class MapRenderer:
-    empty_cell = "🟥"
+    empty_cell = "🟫"
     predator = "🐺"
     herbivore = "🐇"
-    grass = "☘️"
+    grass = "🌱"
     rock = "🪨"
     dead_creature = "🦴"
+    tree = "🌳"
 
     def render(self, game_map: GameMap, move_counter: int):
         os.system('clear')
@@ -39,6 +40,8 @@ class MapRenderer:
                             line += f"{self.rock}"
                         case DeadCreature():
                             line += f"{self.dead_creature}"
+                        case Tree():
+                            line += f"{self.tree}"
                         case _:
                             line += f"-"
 

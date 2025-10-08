@@ -5,3 +5,4 @@ from entities.predator import Predator
 from entities.grass import Grass
 from entities.rock import Rock
 from entities.dead_creature import DeadCreature
+from entities.tree import Tree
