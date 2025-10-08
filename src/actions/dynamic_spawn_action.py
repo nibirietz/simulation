@@ -1,4 +1,4 @@
-from actions import RandomSpawnAction
+from actions import SpawnAction
 from entities import Grass, Herbivore, Predator
 from game_map import GameMap
 
@@ -7,7 +7,7 @@ HERBIVORE_SPAWN_RATE = 0.15
 GRASS_SPAWN_RATE = 0.15
 
 
-class RandomSpawnEntitiesAction(RandomSpawnAction):
+class DynamicSpawnAction(SpawnAction):
     @classmethod
     def execute(cls, game_map: GameMap):
         game_map_square = game_map.width * game_map.height

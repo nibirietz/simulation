@@ -1,1 +1,1 @@
-from controllers.creature_mover import CreatureMover
+from controllers.creature_controller import CreatureController

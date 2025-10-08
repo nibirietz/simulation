@@ -10,7 +10,7 @@ from game_map import GameMap
 T = TypeVar("T", bound=Entity)
 
 
-class RandomSpawnAction(Action):
+class SpawnAction(Action):
     @staticmethod
     @abstractmethod
     def execute(game_map: GameMap):
@@ -29,7 +29,7 @@ class RandomSpawnAction(Action):
         generated_entities: list[type_entity] = []
 
         for _ in range(amount):
-            random_coordinates = RandomSpawnAction._generate_random_empty_coordinates(game_map)
+            random_coordinates = SpawnAction._generate_random_empty_coordinates(game_map)
             generated_entities.append(type_entity(random_coordinates))
 
         return generated_entities

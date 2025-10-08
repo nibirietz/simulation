@@ -1,10 +1,10 @@
 from random import choice
 from coordinates import Coordinates
-from entities import Creature, Predator, Herbivore, Grass
+from entities import Creature, Predator, Herbivore, Grass, DeadCreature
 from game_map import GameMap
 
 
-class CreatureMover:
+class CreatureController:
     @staticmethod
     def move_to_coordinates(game_map: GameMap, creature: Creature, coordinates: Coordinates):
         if game_map.is_cell_empty(coordinates):
@@ -17,20 +17,20 @@ class CreatureMover:
         creature.cause_damage(1)
 
         if not creature.is_alive():
-            game_map.remove_object(creature.coordinates)
+            CreatureController.kill(game_map, creature)
             return
 
         if path is None:
-            CreatureMover.random_move(game_map, creature)
+            CreatureController.random_move(game_map, creature)
             return
 
         if creature.speed + 1 >= len(path):
             if len(path) >= 2:
                 penultimate_coordinates = path[-2]
-                CreatureMover.move_to_coordinates(game_map, creature, penultimate_coordinates)
-            CreatureMover.eat(game_map, creature, path[-1])
+                CreatureController.move_to_coordinates(game_map, creature, penultimate_coordinates)
+            CreatureController.eat(game_map, creature, path[-1])
         else:
-            CreatureMover.move_to_coordinates(game_map, creature, path[creature.speed])
+            CreatureController.move_to_coordinates(game_map, creature, path[creature.speed])
 
     @staticmethod
     def eat(game_map: GameMap, creature: Creature, coordinates: Coordinates):
@@ -44,16 +44,22 @@ class CreatureMover:
             creature.cure_hp(5)
             if not enemy.is_alive():
                 game_map.remove_object(coordinates)
-                CreatureMover.move_to_coordinates(game_map, creature, coordinates)
+                CreatureController.move_to_coordinates(game_map, creature, coordinates)
 
         if isinstance(creature, Herbivore) and isinstance(enemy, Grass):
             creature.cure_hp(5)
             game_map.remove_object(coordinates)
-            CreatureMover.move_to_coordinates(game_map, creature, coordinates)
+            CreatureController.move_to_coordinates(game_map, creature, coordinates)
+
+    @staticmethod
+    def kill(game_map: GameMap, creature: Creature):
+        game_map.remove_object(creature.coordinates)
+        dead_creature = DeadCreature(creature.coordinates)
+        game_map.put_object(dead_creature.coordinates, dead_creature)
 
     @staticmethod
     def random_move(game_map: GameMap, creature: Creature):
         neighbours = [neighbour for neighbour in game_map.neighbour_coordinates(creature.coordinates) if
                       game_map.is_cell_empty(neighbour)]
         if neighbours:
-            CreatureMover.move_to_coordinates(game_map, creature, choice(neighbours))
+            CreatureController.move_to_coordinates(game_map, creature, choice(neighbours))

@@ -9,7 +9,8 @@ class GameMap:
         self.objects: dict[Coordinates, Entity] = dict()
 
     def put_object(self, coordinates: Coordinates, entity: Entity):
-        self.objects[coordinates] = entity
+        if self.is_cell_empty(coordinates):
+            self.objects[coordinates] = entity
 
     def put_objects(self, entities: list[Entity]):
         for entity in entities:
