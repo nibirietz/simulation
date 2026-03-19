@@ -25,21 +25,29 @@ class GameMap:
             return
         del self.objects[coordinates]
 
-    def is_cell_empty(self, coordinates: Coordinates) -> Entity:
+    def is_cell_empty(self, coordinates: Coordinates) -> bool:
         return coordinates not in self.objects
 
     def is_valid_coordinates(self, coordinates: Coordinates):
-        if coordinates.row < 0 or coordinates.row > self.width: return False
-        if coordinates.column < 0 or coordinates.column > self.height: return False
+        if coordinates.row < 0 or coordinates.row >= self.width:
+            return False
+        if coordinates.column < 0 or coordinates.column >= self.height:
+            return False
         return True
 
     def neighbour_coordinates(self, coordinates: Coordinates):
         neighbours = [
-            coordinates + Coordinates(0, -1), coordinates + Coordinates(-1, 0),
-            coordinates + Coordinates(1, 0), coordinates + Coordinates(0, 1)
+            coordinates + Coordinates(0, -1),
+            coordinates + Coordinates(-1, 0),
+            coordinates + Coordinates(1, 0),
+            coordinates + Coordinates(0, 1),
         ]
 
-        return [coordinates for coordinates in neighbours if self.is_valid_coordinates(coordinates)]
+        return [
+            coordinates
+            for coordinates in neighbours
+            if self.is_valid_coordinates(coordinates)
+        ]
 
     def get_entities(self) -> list[Entity]:
         return list(self.objects.values())

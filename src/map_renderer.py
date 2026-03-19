@@ -17,7 +17,7 @@ class MapRenderer:
     tree = "🌳"
 
     def render(self, game_map: GameMap, move_counter: int):
-        os.system('clear')
+        os.system("clear")
 
         print(f"Ходов сделано: {move_counter}.")
         for i in range(game_map.width):
@@ -49,14 +49,14 @@ class MapRenderer:
         print("-" * game_map.width * 2)
         print("Чтобы остановить напишите p. Чтобы выйти напишите e.")
 
-    def is_pause(self):
+    def is_pause(self) -> bool:
         if sys.stdin in select.select([sys.stdin], [], [], 0.5)[0]:
             user_input = input().strip().lower()
             if user_input == "p":
                 return True
         return False
 
-    def is_exit(self):
+    def is_exit(self) -> bool:
         if sys.stdin in select.select([sys.stdin], [], [], 0.5)[0]:
             user_input = input().strip().lower()
             if user_input == "e":
