@@ -34,7 +34,7 @@ class Simulation:
     def start(self):
         while True:
             self.next_turn()
-            sleep(0.25)
+            # sleep(0.25)
             if self.map_renderer.is_pause():
                 self.pause()
             if self.map_renderer.is_exit():

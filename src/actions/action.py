@@ -4,7 +4,6 @@ from game_map import GameMap
 
 
 class Action(ABC):
-    @staticmethod
     @abstractmethod
-    def execute(game_map: GameMap):
+    def execute(self, game_map: GameMap):
         pass

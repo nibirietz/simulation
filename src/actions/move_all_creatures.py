@@ -21,5 +21,6 @@ class MoveAllCreaturesAction(Action):
     def _get_targets(game_map: GameMap, entity: Entity) -> list[Coordinates]:
         if isinstance(entity, Predator):
             return [entity.coordinates for entity in game_map.get_entities() if isinstance(entity, Herbivore)]
+
         if isinstance(entity, Herbivore):
             return [entity.coordinates for entity in game_map.get_entities() if isinstance(entity, Grass)]
