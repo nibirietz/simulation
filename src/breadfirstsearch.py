@@ -6,11 +6,11 @@ from game_map import GameMap
 
 class BreadFirstSearch:
     @staticmethod
-    def search_path(game_map: GameMap, start_coordinates: Coordinates, targets: list[Coordinates]) -> list[
-                                                                                                          Coordinates] | None:
+    def search_path(game_map: GameMap,
+                    start_coordinates: Coordinates,
+                    targets: list[Coordinates]) -> list[Coordinates] | None:
         queue = deque([start_coordinates])
-        previous_cell = {start_coordinates: None}
-        # paths = []
+        previous_cell: dict[Coordinates, Coordinates | None] = {start_coordinates: None}
 
         while queue:
             current_coordinates = queue.popleft()
@@ -24,7 +24,6 @@ class BreadFirstSearch:
                     path_point = previous_cell[path_point]
 
                 path.reverse()
-                # paths.append(path)
                 return path
 
             for neighbour in game_map.neighbour_coordinates(current_coordinates):

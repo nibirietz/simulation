@@ -7,8 +7,7 @@ from game_map import GameMap
 
 
 class MoveAllCreaturesAction(Action):
-    @staticmethod
-    def execute(game_map: GameMap):
+    def execute(self, game_map: GameMap):
         creatures = [entity for entity in game_map.get_entities() if isinstance(entity, Creature)]
 
         bfs = BreadFirstSearch()

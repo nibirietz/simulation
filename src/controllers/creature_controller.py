@@ -2,6 +2,7 @@ from random import choice
 from coordinates import Coordinates
 from entities import Creature, Predator, Herbivore, Grass, DeadCreature
 from game_map import GameMap
+from loguru import logger
 
 
 class CreatureController:
@@ -11,6 +12,8 @@ class CreatureController:
             game_map.remove_object(creature.coordinates)
             game_map.put_object(coordinates, creature)
             creature.coordinates = coordinates
+            logger.bind(type="animal").debug(
+                f"{id(creature)},{type(creature).__name__},move,{coordinates.row},{coordinates.column}")
 
     @staticmethod
     def make_move(game_map: GameMap, creature: Creature, path: list[Coordinates]):
@@ -29,6 +32,8 @@ class CreatureController:
                 penultimate_coordinates = path[-2]
                 CreatureController.move_to_coordinates(game_map, creature, penultimate_coordinates)
             CreatureController.eat(game_map, creature, path[-1])
+            logger.bind(type="animal").debug(
+                f"{id(creature)},{type(creature).__name__},eat,{path[-1].row},{path[-1].column}")
         else:
             CreatureController.move_to_coordinates(game_map, creature, path[creature.speed])
 
@@ -53,6 +58,8 @@ class CreatureController:
 
     @staticmethod
     def kill(game_map: GameMap, creature: Creature):
+        logger.bind(type="animal").debug(
+            f"{id(creature)},{type(creature).__name__},dead")
         game_map.remove_object(creature.coordinates)
         dead_creature = DeadCreature(creature.coordinates)
         game_map.put_object(dead_creature.coordinates, dead_creature)
