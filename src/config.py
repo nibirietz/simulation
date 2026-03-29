@@ -1,19 +1,19 @@
 class PredatorConfig:
-    SPEED = 1
-    HP = 10
-    ATTACK_POWER = 5
+    SPEED = 4
+    HP = 15
+    ATTACK_POWER = 8
     MAX_HP = 15
 
 
 class HerbivoreConfig:
     SPEED = 1
-    HP = 10
-    MAX_HP = 10
+    HP = 8
+    MAX_HP = 8
 
 
 class SpawnConfig:
-    PREDATORS_SPAWN_RATE = 0.1
+    PREDATORS_SPAWN_RATE = 0.10
     HERBIVORE_SPAWN_RATE = 0.15
-    GRASS_SPAWN_RATE = 0.20
+    GRASS_SPAWN_RATE = 0.1
     ROCKS_SPAWN_RATE = 0.2
     TREES_SPAWN_RATE = 0.3

@@ -11,7 +11,12 @@ class DynamicSpawnAction(SpawnAction):
         herbivores_amount = int(SpawnConfig.HERBIVORE_SPAWN_RATE * game_map_square ** 0.5)
         predators_amount = int(SpawnConfig.PREDATORS_SPAWN_RATE * game_map_square ** 0.5)
 
-        grasses = self._generate_random_entities(game_map, Grass, grasses_amount)
-        herbivores = self._generate_random_entities(game_map, Herbivore, herbivores_amount)
-        predators = self._generate_random_entities(game_map, Predator, predators_amount)
-        game_map.put_objects(grasses + herbivores + predators)
+        if len(game_map.objects) < 0.7 * game_map_square:
+            grass_count = list(grass for grass in game_map.objects if isinstance(grass, Grass))
+            grasses = []
+            if len(grass_count) < 0.2 * game_map_square:
+                grasses = self._generate_random_entities(game_map, Grass, grasses_amount)
+
+            herbivores = self._generate_random_entities(game_map, Herbivore, herbivores_amount)
+            predators = self._generate_random_entities(game_map, Predator, predators_amount)
+            game_map.put_objects(grasses + herbivores + predators)
